@@ -23,14 +23,12 @@ if __name__ == '__main__':
     this_file_path = os.path.abspath(os.path.dirname(__file__))
 
     parser = argparse.ArgumentParser(description='指定した地点のMSM数値予報モデルの風向風速データを取得しcsvに変換するツール')
+    parser.add_argument('place', help='風向風速を取りだす地点名。現在はラジオゾンデの観測所名に加え各海打ち射点"Izu-umi","Noshiro-umi"から指定可能。')
     parser.add_argument('year_range')
     parser.add_argument('month_range')
     parser.add_argument('day_range')
     parser.add_argument('init_time')
     parser.add_argument('forecast_time')
-    parser.add_argument('--place', help='風向風速を取りだす地点名。現在は"Izu-umi","Hachijo-jima","Noshiro-umi"から指定可能。')
-    #parser.add_argument('-lat', '--latitude', help='風向風速を取り出す地点の緯度[deg]')
-    #parser.add_argument('-lon', '--longitude', help='風向風速を取り出す地点の経度[deg]')
 
     parser.add_argument('--wgrib2_exec_path', default="wgrib2", help='Exec path of wgrib2. default:"wgrib2"')
 

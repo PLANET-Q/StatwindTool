@@ -116,7 +116,6 @@ if __name__ == '__main__':
                 date_str = '{:0>4}{:0>2}{:0>2}{:0>2}'.format(y, m, d, hour)
                 csv_filename = os.path.join(savedir, 'Rawin_'+date_str+'.csv')
                 df = getSondeDataAsDataFrame(station_name, y, m, d, hour)
-                print(df['DIRECTION_DEGREE'])
                 df_converted = convertSondeDataFormat(df)
                 df_converted.to_csv(csv_filename)
     

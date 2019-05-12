@@ -7,3 +7,4 @@ tools/MSMtool/csv
 tools/MSMtool/tmp
 wind_MSM/*
 wind_Rawin/*
+outputs/*

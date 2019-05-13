@@ -6,10 +6,10 @@ Created on Sun Dec 30 01:27:20 2018
 @author: shugo
 """
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import pandas as pd
 from scipy import interpolate
-from mpl_toolkits.mplot3d import Axes3D
+#from mpl_toolkits.mplot3d import Axes3D
 
 
 def _convert(df,dfConverted,m):      #m = 1から16まで
@@ -262,48 +262,6 @@ def interpolate_space(forecast_csv_filename, interp_output_filename, point_coord
         # temperature array
         temprature_interp[i] = func_TMP(point_coord[0], point_coord[1])
         
-    
-        """
-        print(func(40.242865, 140.010450))
-        
-        X,Y = np.meshgrid(latitude_tmp, longtitude_tmp)
-    
-        fig = plt.figure()
-        ax = Axes3D(fig)
-        ax.scatter3D(X,Y,altitude_tmp, s=100)
-        
-        latitude_tmp2 = np.linspace(40.,40.5)
-        longtitude_tmp2 = np.linspace(139.75,140.25)
-        altitude_tmp2 = func( latitude_tmp2, longtitude_tmp2)
-        X2,Y2 = np.meshgrid( latitude_tmp2,longtitude_tmp2)
-        ax.plot_surface(X2,Y2,altitude_tmp2)
-        
-        
-        aaaa=0
-        """
-    
-    
-        
-        """
-        # --------------------
-        # compute average
-        # --------------------
-        # sum of weight
-        w_sum = df_tmp['weight'].sum(axis=0)
-        
-        # sum of each values
-        # w1 = UGRD averaged value
-        
-        alt, w1, w2, w3, tmp = df_tmp[['HGT_w', 'UGRD_w', 'VGRD_w', 'VVEL_w', 'TMP_w']].sum(axis=0)
-        wing_vec = np.array([-w1, w2, w3])
-        
-        # UGRD: wind from east, VGRD: wind from south, VVEL: vertical
-        # wind_vec represented in xyz (x: to east, y: to north)
-        altitude_avg[i] = alt/w_sum
-        wind_vec_avg[i,:] = wing_vec/w_sum
-        temprature_avg[i] = tmp/w_sum
-        """
-        
         
         # --------------------
         #  get raw data
@@ -329,6 +287,7 @@ def interpolate_space(forecast_csv_filename, interp_output_filename, point_coord
                                'temperature':pd.Series(temprature_interp) })
     df_interp.to_csv(interp_output_filename, index=False)
     
+    '''
     if plot_flag:
         # --------------------
         #  plot averaged
@@ -395,5 +354,5 @@ def interpolate_space(forecast_csv_filename, interp_output_filename, point_coord
         plt.ylabel('altitude [km]')
         plt.grid()
     # END IF
-        
-    return None
+    '''
+    return

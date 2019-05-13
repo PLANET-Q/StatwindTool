@@ -10,7 +10,6 @@ import numpy as np
 import urllib.request
 from bs4 import BeautifulSoup
 import pandas as pd
-import matplotlib.pyplot as plt
 import os
 import traceback
 import argparse

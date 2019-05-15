@@ -116,6 +116,6 @@ if __name__ == '__main__':
                 csv_filename = os.path.join(savedir, 'Rawin_'+date_str+'.csv')
                 df = getSondeDataAsDataFrame(station_name, y, m, d, hour)
                 df_converted = convertSondeDataFormat(df)
-                df_converted.to_csv(csv_filename)
+                df_converted.to_csv(csv_filename, encoding='utf-8')
     
     print('OK')

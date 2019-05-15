@@ -5,29 +5,11 @@ import json
 import numpy as np
 from glob import glob
 import pandas as pd
-from scipy.interpolate import interp1d
+from tools.load_wind import loadWind
 
 import matplotlib.pyplot as plt
 
 this_file_path = os.path.abspath(os.path.dirname(__file__))
-
-
-def loadWind(filename, interp_kind='linear'):
-    df = pd.read_csv(filename)
-    altitudes = np.array(df['altitude'])
-
-    # 風のu, vの方向
-    # U: 西→東に吹く風を正
-    # V: 南→北を正
-    wind_u = np.array(df['wind_u'])
-    wind_v = np.array(df['wind_v'])
-    wind_vec = np.c_[wind_u, wind_v]
-    wind = interp1d(
-            altitudes,
-            wind_vec,
-            kind=interp_kind,
-            axis=0)
-    return wind, altitudes
 
 
 def getMSMWind(location, datetime, fore_time, interp_kind='linear'):
@@ -132,14 +114,12 @@ if __name__ == '__main__':
                     print('Cannot get MSM Wind')
                     continue
                 msm_alt_min = np.min(msm_alt)
-                # print('Altidue min of MSM: ', msm_alt_min)
 
                 rawin, rawin_alt = getRawin(place, rawin_date, interp_kind='linear')
                 if rawin is None:
                     print('Cannot get Rawin')
                     continue
                 rawin_alt_min = np.min(rawin_alt)
-                # print('Altidue min of Rawin: ', rawin_alt_min)
 
                 for i, alt in enumerate(alt_axis):
                     if msm_alt_min > alt or rawin_alt_min > alt:
@@ -187,7 +167,7 @@ if __name__ == '__main__':
     out_path = os.path.join(out_foldername, out_filename)
     if not os.path.exists(out_foldername):
         os.makedirs(out_foldername)
-    
+
     with open(out_path, 'w') as f:
         json.dump(stat_parameters, f, indent=4, cls=TypeEncoder)
     
